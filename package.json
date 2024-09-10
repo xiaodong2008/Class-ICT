@@ -1,0 +1,11 @@
+{
+  "name": "Class-ICT",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "pnpm -r --filter=./packages/** run build"
+  },
+  "private": true,
+  "author": "xiaodong2008<hi@xiaodong.moe>",
+  "license": "MIT"
+}
