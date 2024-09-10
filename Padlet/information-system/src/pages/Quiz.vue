@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import Button from "primevue/button";
-import Slider from "primevue/slider";
-import InputText from "primevue/inputtext";
 import RadioButton from "primevue/radiobutton";
 
 import { ref, onUnmounted } from "vue";
@@ -10,7 +8,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const { username, num, time } = JSON.parse(
-  localStorage.getItem("information-system-data")
+  localStorage.getItem("information-system-data")!
 );
 
 if (!username || !num || !time) {
