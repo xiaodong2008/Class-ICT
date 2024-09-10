@@ -74,16 +74,17 @@ const endQuiz = () => {
   <div class="home">
     <h4>Welcome, {{ username }}</h4>
     <h4>Time Remaining: {{ timeRemaining }}</h4>
-    <div v-for="question in questions" :key="question.question">
+    <div v-for="(question, key) in questions" :key="question.question">
       <h5>{{ question.question }}</h5>
       <div v-for="option in question.options" :key="option">
         <RadioButton
           v-model="question.selected"
+          :input-id="key + option"
           :value="option"
           name="option"
           class="ml-2"
         />
-        <label :for="option" class="ml-2">{{ option }}</label>
+        <label :for="key + option" class="ml-2">{{ option }}</label>
       </div>
     </div>
     <div class="bottom">
