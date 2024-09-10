@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "./pages/Home.vue";
-import Overview from "./pages/Overview.vue";
 import QuizView from "./pages/Quiz.vue";
+import ResultView from "./pages/Overview.vue";
 
 const routes = [
   { path: "/", component: HomeView },
   { path: "/quiz", component: QuizView },
   {
-    path: "/overview",
-    component: Overview,
+    path: "/result",
+    component: ResultView,
   },
 ];
 
