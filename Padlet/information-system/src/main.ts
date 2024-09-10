@@ -1,4 +1,5 @@
 import "./style.css";
+import "primeicons/primeicons.css";
 
 import { createMemoryHistory, createRouter } from "vue-router";
 
