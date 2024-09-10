@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "pnpm -r --filter=./packages/** run build"
+    "generate-site": "pnpm -r --filter=./**/* run build && node ./scripts/move.js"
   },
   "private": true,
   "author": "xiaodong2008<hi@xiaodong.moe>",
