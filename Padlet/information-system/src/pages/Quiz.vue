@@ -44,7 +44,8 @@ const questions = ref([
   },
 ]);
 
-const endTime = new Date().getTime() + time * 60 * 1000;
+const startTime = new Date().getTime();
+const endTime = startTime + time * 60 * 1000;
 let timeRemaining = ref(updateRemainingTime());
 
 function updateRemainingTime() {
@@ -64,7 +65,14 @@ onUnmounted(() => clearInterval(updateRemainingTimeInterval));
 const endQuiz = () => {
   localStorage.setItem(
     "information-system-data",
-    JSON.stringify({ username, num, time, questions })
+    JSON.stringify({
+      username,
+      num,
+      time,
+      questions: questions.value,
+      startTime,
+      endTime: new Date().getTime(),
+    })
   );
   router.push("/result");
 };
