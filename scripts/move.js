@@ -17,6 +17,10 @@ function readDir(dir) {
     if (stat.isDirectory()) {
       // if the dir is a site project, then move it to the site dir
       if (item === "site") {
+        // exclude the site dir itself
+        if (itemPath === siteDir) {
+          return;
+        }
         const target = path.resolve(siteDir, path.basename(dir));
         fs.renameSync(dir, target);
         console.log(`move ${dir} to ${target}`);
