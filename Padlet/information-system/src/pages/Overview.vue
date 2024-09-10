@@ -32,7 +32,8 @@ function tryAgain() {
       Time Taken: {{ isSmallerThanOneMinute && "< " }}{{ usedMinutes }} min
     </h4>
     <h4>
-      Score: {{ questions.filter((q) => q.answer === q.selected).length }} /
+      Score:
+      {{ questions.filter((q: any) => q.answer === q.selected).length }} /
       {{ questions.length }}
     </h4>
     <div v-for="(question, key) in questions" :key="question.question">

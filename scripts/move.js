@@ -21,9 +21,34 @@ function readDir(dir) {
         if (itemPath === siteDir) {
           return;
         }
+        // exclude the node_modules
+        if (itemPath.includes("node_modules")) {
+          return;
+        }
         const target = path.resolve(siteDir, path.basename(dir));
-        fs.renameSync(dir, target);
-        console.log(`move ${dir} to ${target}`);
+        // mkdir
+        if (!fs.existsSync(target)) {
+          fs.mkdirSync(target);
+        }
+        console.log(`move ${itemPath} to ${target}`);
+        // deep copy the dir
+        function copyDir(src, dest) {
+          const dirs = fs.readdirSync(src);
+          dirs.forEach((item) => {
+            const itemPath = path.resolve(src, item);
+            const targetPath = path.resolve(dest, item);
+            const stat = fs.statSync(itemPath);
+            if (stat.isDirectory()) {
+              if (!fs.existsSync(targetPath)) {
+                fs.mkdirSync(targetPath);
+              }
+              copyDir(itemPath, targetPath);
+            } else {
+              fs.copyFileSync(itemPath, targetPath);
+            }
+          });
+        }
+        copyDir(itemPath, target);
       } else {
         readDir(itemPath);
       }
