@@ -4,14 +4,51 @@
   <div class="window-wrapper">
     <h2>E-Learning System</h2>
     <p></p>
-    <router-view class="window"></router-view>
+    <div class="overflow-wrapper">
+      <router-view class="window" v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s;
+}
+
+.fade-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.fade-leave-to {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+.fade-enter-from {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+.fade-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
 .window {
   width: 100%;
   height: 100%;
+}
+
+.overflow-wrapper {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .window-wrapper {

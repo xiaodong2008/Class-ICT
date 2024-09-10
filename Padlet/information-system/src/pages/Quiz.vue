@@ -23,20 +23,24 @@ const startQuiz = () => {
 
 <template>
   <div class="home">
-    <h4>Do the quiz online and check your marks easliy</h4>
-    <span>Enter Username:</span>
-    <InputText v-model="uname" placeholder="Enter your username" />
-    <span>Set Question Number: {{ num }}</span>
-    <Slider v-model="num" :min="3" :max="10" />
-    <span>Set Time Limit: {{ time }} minutes</span>
-    <Slider v-model="time" :min="5" :max="30" />
-    <Button
-      class="button"
-      label="Start Quiz"
-      icon="pi pi-angle-right"
-      icon-pos="right"
-      @click="startQuiz"
-    />
+    <h4>You're now doing quiz online</h4>
+    <div class="bottom">
+      <Button
+        class="button"
+        severity="secondary"
+        label="Back to Home Page"
+        icon="pi pi-angle-left"
+        icon-pos="left"
+        @click="router.push('/')"
+      />
+      <Button
+        class="button"
+        label="Submit"
+        icon="pi pi-angle-right"
+        icon-pos="right"
+        @click="startQuiz"
+      />
+    </div>
   </div>
 </template>
 
@@ -69,7 +73,10 @@ const startQuiz = () => {
     display: block;
   }
 
-  .button {
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin-top: auto;
     margin-bottom: 20px;
   }
