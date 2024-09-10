@@ -17,6 +17,33 @@ if (!username || !num || !time) {
   router.push("/");
 }
 
+const questions = ref([
+  {
+    question: "Which one is not a DBMS software?",
+    options: ["MySQL", "Oracle", "Java", "SQL Server"],
+    answer: "Java",
+    selected: "",
+  },
+  {
+    question: "Which one is not a programming language?",
+    options: ["Java", "Python", "C++", "HTML"],
+    answer: "HTML",
+    selected: "",
+  },
+  {
+    question: "Which one is not a front-end framework?",
+    options: ["React", "Vue", "Laravel", "Angular"],
+    answer: "Laravel",
+    selected: "",
+  },
+  {
+    question: "Which one is not a back-end framework?",
+    options: ["Express", "Django", "Spring", "Bootstrap"],
+    answer: "Bootstrap",
+    selected: "",
+  },
+]);
+
 const endTime = new Date().getTime() + time * 60 * 1000;
 let timeRemaining = ref(updateRemainingTime());
 
@@ -35,66 +62,26 @@ const updateRemainingTimeInterval = setInterval(
 onUnmounted(() => clearInterval(updateRemainingTimeInterval));
 
 const endQuiz = () => {
-  localStorage.setItem("information-system-data", JSON.stringify({}));
+  localStorage.setItem(
+    "information-system-data",
+    JSON.stringify({ username, num, time, questions })
+  );
   router.push("/result");
 };
-
-const selectedCategory = ref("Production");
-const categories = ref([
-  { name: "Accounting", key: "A" },
-  { name: "Marketing", key: "M" },
-  { name: "Production", key: "P" },
-  { name: "Research", key: "R" },
-]);
-
-const questions = [
-  {
-    question: "Which one is not a DBMS software?",
-    options: ["MySQL", "Oracle", "Java", "SQL Server"],
-    answer: "Java",
-  },
-  {
-    question: "Which one is not a programming language?",
-    options: ["Java", "Python", "C++", "HTML"],
-    answer: "HTML",
-  },
-  {
-    question: "Which one is not a front-end framework?",
-    options: ["React", "Vue", "Laravel", "Angular"],
-    answer: "Laravel",
-  },
-  {
-    question: "Which one is not a back-end framework?",
-    options: ["Express", "Django", "Spring", "Bootstrap"],
-    answer: "Bootstrap",
-  },
-];
 </script>
 
 <template>
   <div class="home">
+    <h4>Welcome, {{ username }}</h4>
     <h4>Time Remaining: {{ timeRemaining }}</h4>
-    <!-- <div
-          v-for="category in categories"
-          :key="category.key"
-          class="flex items-center"
-        >
-          <RadioButton
-            v-model="selectedCategory"
-            :inputId="category.key"
-            name="dynamic"
-            :value="category.name"
-          />
-          <label :for="category.key" class="ml-2">{{ category.name }}</label>
-        </div> -->
     <div v-for="question in questions" :key="question.question">
       <h5>{{ question.question }}</h5>
       <div v-for="option in question.options" :key="option">
         <RadioButton
-          v-model="selectedCategory"
-          :inputId="option"
-          name="dynamic"
+          v-model="question.selected"
           :value="option"
+          name="option"
+          class="ml-2"
         />
         <label :for="option" class="ml-2">{{ option }}</label>
       </div>
@@ -113,7 +100,7 @@ const questions = [
         label="Submit"
         icon="pi pi-angle-right"
         icon-pos="right"
-        @click="startQuiz"
+        @click="endQuiz"
       />
     </div>
   </div>
