@@ -8,4 +8,5 @@ export default defineConfig({
     outDir: "./site",
     emptyOutDir: true, // also necessary
   },
+  base: "/information-system/",
 });
