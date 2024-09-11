@@ -11,6 +11,7 @@
         </transition>
       </router-view>
     </div>
+    <span>Made by xiaodong2008</span>
   </div>
 </template>
 
@@ -58,7 +59,7 @@
   border: 1px solid #979292;
   padding: 14px 20px;
   max-width: 600px;
-  max-height: 460px;
+  max-height: 520px;
   width: 80%;
   height: 80%;
 }
@@ -72,5 +73,11 @@ p {
   width: 100%;
   border-top: 1px solid #979292;
   margin: 10px 0;
+}
+
+span {
+  color: gray;
+  font-size: 13px;
+  margin-top: 2px;
 }
 </style>
