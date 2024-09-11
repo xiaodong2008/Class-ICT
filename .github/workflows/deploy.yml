@@ -31,7 +31,7 @@ jobs:
         run: npm i -g pnpm
 
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm i --no-frozen-lockfile
 
       - name: Build Site
         run: npm run generate-site
