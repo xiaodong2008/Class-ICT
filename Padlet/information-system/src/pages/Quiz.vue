@@ -15,32 +15,83 @@ if (!username || !num || !time) {
   router.push("/");
 }
 
-const questions = ref([
+interface Question {
+  question: string;
+  options: string[];
+  answer: string;
+  selected?: string | null;
+}
+
+const questionsDb: Question[] = [
   {
     question: "Which one is not a DBMS software?",
     options: ["MySQL", "Oracle", "Java", "SQL Server"],
     answer: "Java",
-    selected: "",
   },
   {
     question: "Which one is not a programming language?",
     options: ["Java", "Python", "C++", "HTML"],
     answer: "HTML",
-    selected: "",
   },
   {
     question: "Which one is not a front-end framework?",
     options: ["React", "Vue", "Laravel", "Angular"],
     answer: "Laravel",
-    selected: "",
   },
   {
     question: "Which one is not a back-end framework?",
     options: ["Express", "Django", "Spring", "Bootstrap"],
     answer: "Bootstrap",
-    selected: "",
   },
-]);
+  {
+    question: "Which one is not a word in compiler terminology?",
+    options: ["Log", "Parse", "Lex", "Finite-state machine FSM"],
+    answer: "Log",
+  },
+  {
+    question: "Which keyword is used to delete a table in SQL?",
+    options: ["REMOVE", "DELETE", "DROP", "REMOVE TABLE"],
+    answer: "DROP",
+  },
+  {
+    question: "Which one is not a keyword in SQL?",
+    options: ["SELECT", "INSERT", "UPDATE", "MODIFY"],
+    answer: "MODIFY",
+  },
+  {
+    question: "Which one is not a keyword in JavaScript?",
+    options: ["Date", "this", "function", "let"],
+    answer: "Date",
+  },
+  {
+    question: "Which one is only available in JavaScript commonjs module?",
+    options: ["module.exports", "console.log", "Math", "void"],
+    answer: "module.exports",
+  },
+  {
+    question: "Which one can only used one time in a web page?",
+    options: ["p", "div", "span", "body"],
+    answer: "body",
+  },
+  {
+    question: "Which one is not a valid HTML tag?",
+    options: ["<container>", "<section>", "<article>", "<div>"],
+    answer: "<container>",
+  },
+];
+
+const questions = ref<Question[]>([]);
+
+while (questions.value.length < num) {
+  const randomIndex = Math.floor(Math.random() * questionsDb.length);
+  const randomQuestion = questionsDb[randomIndex];
+  if (!questions.value.some((q) => q.question === randomQuestion.question)) {
+    questions.value.push({
+      ...randomQuestion,
+      selected: null,
+    });
+  }
+}
 
 const startTime = new Date().getTime();
 const endTime = startTime + time * 60 * 1000;
