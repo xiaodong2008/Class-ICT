@@ -1,3 +1,3 @@
 module.exports = {
-  base: "/frace-system/",
+  publicPath: "/frace-system/",
 };
