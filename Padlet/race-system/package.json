@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target site"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",

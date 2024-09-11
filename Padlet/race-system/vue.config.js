@@ -1,3 +1,4 @@
 module.exports = {
-  publicPath: "/frace-system/",
+  publicPath: "/race-system/",
+  outputDir: "/site",
 };
