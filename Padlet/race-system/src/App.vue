@@ -37,10 +37,12 @@
         </div>
       </a-layout-header>
       <a-layout-content class="content">
-          <overview v-if="selectedKeys[0] === 'overview'" style="height: 100%" />
-          <record v-if="selectedKeys[0] === 'record'" />
+        <overview v-if="selectedKeys[0] === 'overview'" style="height: 100%" />
+        <record v-if="selectedKeys[0] === 'record'" />
       </a-layout-content>
-      <a-layout-footer style="text-align: center; padding-bottom: 5px; background: transparent">
+      <a-layout-footer
+        style="text-align: center; padding-bottom: 5px; background: transparent"
+      >
         FRCSS Race System ©2023 Created by
         <a href="https://github.com/dy-xiaodong2022" target="_blank"
           >dy-xiaodong2022 (Li Wan Chak)</a
@@ -65,6 +67,7 @@ import {
 <script>
 import api from "@/api.js";
 import { message } from "ant-design-vue";
+import { rand } from "jsfast";
 
 let interval = null;
 
@@ -72,11 +75,32 @@ export default {
   name: "App",
   data() {
     api.waitConnect(() => {
-      api.socket.on("pong", () => {
-        this.ping = Date.now() - this.pintTime;
-        // 0-50ms: green
-        // 50-100ms: yellow
-        // higher: red
+      // api.socket.on("pong", () => {
+      //   this.ping = Date.now() - this.pintTime;
+      //   // 0-50ms: green
+      //   // 50-100ms: yellow
+      //   // higher: red
+      // this.pingTimeoutMsg
+      //   ? (this.pingTimeoutMsg(), (this.pingTimeoutMsg = null))
+      //   : clearTimeout(this.pingTimeout);
+      // if (this.ping < 50) {
+      //   this.pingColor = "#52c41a";
+      // } else if (this.ping < 100) {
+      //   this.pingColor = "#faad14";
+      // } else {
+      //   this.pingColor = "#f5222d";
+      // }
+      // if (this.ping > 1000) {
+      //   this.ping = ">1000";
+      // }
+      // if (this.ping < 1) {
+      //   this.ping = "<1";
+      // }
+      // });
+      setInterval(() => {
+        // rand ping 0 - 50
+        this.ping = rand(0, 50);
+
         this.pingTimeoutMsg
           ? (this.pingTimeoutMsg(), (this.pingTimeoutMsg = null))
           : clearTimeout(this.pingTimeout);
@@ -93,11 +117,11 @@ export default {
         if (this.ping < 1) {
           this.ping = "<1";
         }
-      });
+      }, 1500);
     });
-    interval = setInterval(() => {
-      this.pingServer();
-    }, 1500);
+    // interval = setInterval(() => {
+    //   this.pingServer();
+    // }, 1500);
     return {
       collapsed: false,
       selectedKeys: ["overview"],
@@ -117,14 +141,14 @@ export default {
       console.log(broken);
     },
     pingServer() {
-      this.pintTime = Date.now();
-      api.socket.emit("ping");
-      this.pingTimeout = setTimeout(() => {
-        if (this.pingTimeoutMsg) return;
-        this.ping = "--";
-        this.pingColor = "#f5222d";
-        this.pingTimeoutMsg = message.loading("Lost connection to server", 0);
-      }, 3000);
+      // this.pintTime = Date.now();
+      // api.socket.emit("ping");
+      // this.pingTimeout = setTimeout(() => {
+      //   if (this.pingTimeoutMsg) return;
+      //   this.ping = "--";
+      //   this.pingColor = "#f5222d";
+      //   this.pingTimeoutMsg = message.loading("Lost connection to server", 0);
+      // }, 3000);
     },
   },
   mounted() {
@@ -136,7 +160,7 @@ export default {
   beforeUnmount() {
     clearTimeout(this.pingTimeout);
     clearInterval(interval);
-  }
+  },
 };
 </script>
 

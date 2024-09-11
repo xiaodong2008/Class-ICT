@@ -37,6 +37,7 @@ export default {
 
       console.log("body", body);
       api.post("/record/get", body).then((data) => {
+        console.log(data);
         this.$emit(
           "update",
           data.map((record) => {
@@ -81,7 +82,9 @@ export default {
       @change="updateTable"
       @ok="updateTable"
     />
-    <a-button style="margin-left: auto" @click="updateTable()">Search Record</a-button>
+    <a-button style="margin-left: auto" @click="updateTable()"
+      >Search Record</a-button
+    >
   </a-space>
 </template>
 
